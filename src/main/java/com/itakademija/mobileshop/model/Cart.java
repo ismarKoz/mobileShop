@@ -22,7 +22,7 @@ public class Cart {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_cart_id",referencedColumnName = "cart_id")
+    @JoinColumn(referencedColumnName = "cart_id")
     private List<OrderEntry> orderEntry;
 
     private DeliveryType deliveryType;

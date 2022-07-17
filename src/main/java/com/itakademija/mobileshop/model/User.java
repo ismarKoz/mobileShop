@@ -3,24 +3,34 @@ package com.itakademija.mobileshop.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+
 
 @Entity
 @Data
 
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "user_id")
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
     private String lastname;
+
+    @Column(unique = true)
     private String email;
-    private Date dateOfBirth;
+//    @Column(nullable = false)
+//    private Date dateOfBirth;
 
     @OneToOne(mappedBy = "user")
     private Cart cart;

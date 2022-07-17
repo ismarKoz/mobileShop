@@ -14,10 +14,10 @@ public class Order {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name= "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
-//    @OneToMany
-//    private List<OrderEntry> orderEntry;
+    @OneToMany
+    private List<OrderEntry> orderEntry;
     private DeliveryType deliveryType;
     private Integer totalPrice;
     private Integer numberOfItems;

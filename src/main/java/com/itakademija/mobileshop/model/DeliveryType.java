@@ -1,5 +1,8 @@
 package com.itakademija.mobileshop.model;
 
+import lombok.Getter;
+
+@Getter
 public enum DeliveryType {
     SHIPPING("shipping"),
     IN_STORE("inStore");

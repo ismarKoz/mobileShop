@@ -1,42 +1,58 @@
 package com.itakademija.mobileshop.controller;
 
+import com.itakademija.mobileshop.model.Role;
 import com.itakademija.mobileshop.model.User;
-import com.itakademija.mobileshop.repository.UserRepository;
+import com.itakademija.mobileshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-//@RequestMapping("/user")
+
+@Controller
 public class UserController {
 
     @Autowired
-    private final UserRepository userRepository;
+    private UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  @GetMapping("/")
+    public String viewUsers(Model model) {
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("listaKorisnika", userList);
+        return "index";
     }
 
-   /* @GetMapping("/{id}")
-    public User getSingleUser(@PathVariable("id") Long id) {
-        return this.userRepository.findById(id).get();
+    @GetMapping("/register")
+    public String showNewUserForm(Model model) {
+        User user = new User();
+        model.addAttribute("prazanKorisnik", user);
+        return "register";
     }
 
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
 
-
-    @GetMapping("/")
-    public List<User> findAllUsers() {
-        return this.userRepository.findAll();*/
     @PostMapping("/saveUser")
-
-    public ResponseEntity<String> saveUser (@RequestBody List<User> users) {
-
-        userRepository.saveAll(users);
-        return ResponseEntity.ok("Save data");
+    public String saveUser(@ModelAttribute("prazanKorisnik") User user) {
+        user.setRole(Role.USER);
+        String hashedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        userService.saveUser(user);
+        return "redirect:/";
     }
-    }
+}
+
 
 
 

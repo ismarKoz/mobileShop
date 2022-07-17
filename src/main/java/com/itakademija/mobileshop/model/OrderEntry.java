@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+
 @Entity
 @Data
 public class OrderEntry {
@@ -14,8 +15,9 @@ public class OrderEntry {
     @GeneratedValue
     private Long id;
 
-//    @OneToOne
-//    private Product product;
+    @OneToOne
+    private Product product;
 
     private Integer quantity;
+
 }

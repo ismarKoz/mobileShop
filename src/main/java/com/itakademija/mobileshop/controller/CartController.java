@@ -1,13 +1,11 @@
 package com.itakademija.mobileshop.controller;
 
-import com.itakademija.mobileshop.model.Cart;
-import com.itakademija.mobileshop.model.OrderEntry;
-import com.itakademija.mobileshop.repository.CartRepository;
 import com.itakademija.mobileshop.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class CartController {
 
   private final CartService cartService;
