@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,7 +23,13 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    //ovjde treba provjeriti jos nesto malo mi je sumnjivo
   @GetMapping("/")
+    public String viewAdmin() {
+        return "admin";
+    }
+
+    @GetMapping("/users")
     public String viewUsers(Model model) {
         List<User> userList = userService.getAllUsers();
         model.addAttribute("listaKorisnika", userList);
