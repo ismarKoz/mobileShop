@@ -31,7 +31,7 @@ public class UserController {
     //ovjde treba provjeriti jos nesto malo mi je sumnjivo
   @GetMapping("/")
     public String viewAdmin() {
-        return "new";
+        return "index";
     }
 
     @GetMapping("/users")
